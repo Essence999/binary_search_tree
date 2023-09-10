@@ -103,7 +103,7 @@ class BinarySearchTree:
         if self.is_empty():
             return None
         if node.right is None:
-            return node
+            return node.value
         return self.get_maior_recursivo(node.right)
 
     def get_maior_iterativo(self):
@@ -192,7 +192,7 @@ class BinarySearchTree:
             return self._search_bst(node.left, obj)
         return self._search_bst(node.right, obj)
 
-    # Algumas implementações de operações com ABBs em forma iterativa:
+    # Algumas implementações de operações com BSTs em forma iterativa:
     def find(self, obj):
         if self.is_empty():
             return None
@@ -207,7 +207,7 @@ class BinarySearchTree:
                 current = current.right
         return None  # Retornamos None se não encontramos o item procurado
 
-    # Implementação iterativa da inserção na ABB
+    # Implementação iterativa da inserção na BST
     def insert(self, valor):
         try:
             novo_node = Node(valor)
@@ -215,7 +215,7 @@ class BinarySearchTree:
             return None  # Memória insuficiente
 
         if self.is_empty():
-            self.root = novo_node  # Se a ABB estiver vazia, inserimos na raiz
+            self.root = novo_node  # Se a BST estiver vazia, inserimos na raiz
             return valor
 
         atual = self.root  # Começamos procurando pela raiz
