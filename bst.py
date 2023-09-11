@@ -1,9 +1,30 @@
 from node import Node
 
 
-class BinarySearchTree:
+class Bst:
     def __init__(self):
         self.root = None
+        # Atributo necessário para efetuar o balanceamento estático
+        self.lista_aux = []
+
+    def atravessar_arvore(self):
+        print("\nVamos mostrar a BST percorrendo em-ordem:")
+        self.em_ordem()
+        print("\nPré ordem:")
+        self.pre_ordem()
+        print("\nPós ordem:")
+        self.pos_ordem()
+        print("\nEm nível:")
+        self.em_nivel()
+        print("\nPré ordem iterativo:")
+        self.pre_ordem_iterativo()
+
+    def visualizar_arvore(self):
+        print("\nVisualização da árvore pré balanceamento:\n")
+        print(self)
+        self.balancear()
+        print("Visualização da árvore pós balanceamento:\n")
+        print(self)
 
     def __str__(self):
         return f"{self.root}"
@@ -16,7 +37,7 @@ class BinarySearchTree:
         self._add(novo, self.root)
         return valor
 
-    def _add(self, novo=Node(), anterior=None):
+    def _add(self, novo, anterior=None):
         if self.root is None:
             self.root = novo
             return self.root
@@ -69,14 +90,15 @@ class BinarySearchTree:
             print(node.value)
 
     def em_nivel(self):
-        fila = [self.root]
-
-        while fila:
-            node_aux = fila.pop(0)
+        if self.root is None:
+            return
+        fila_aux = [self.root]
+        while fila_aux:
+            node_aux = fila_aux.pop(0)
             if node_aux.left:
-                fila.append(node_aux.left)
+                fila_aux.append(node_aux.left)
             if node_aux.right:
-                fila.append(node_aux.right)
+                fila_aux.append(node_aux.right)
             print(node_aux.value)
 
     # Determina o menor elemento a partir de um nó
@@ -138,12 +160,16 @@ class BinarySearchTree:
         return self._eliminar(self.root, None, element)
 
     # Remove um elemento da árvore, retorna true ou false
-    def _eliminar(self, node=Node(), parent=Node(), element=None):
+    def _eliminar(self, node, parent, element):
         if node is None:
             return False  # Elemento não encontrado
         if element == node.value:
             # Caso A: se node não possui filhos, basta eliminar o nó
-            if node.left is None and node.right is None:
+            # Senão tiver pai, é a raiz da árvore.
+            if parent is None:
+                self.root = None
+            # Senão o pai deve deserdar o filho
+            elif node.left is None and node.right is None:
                 self._substituir_nodo(node, parent, None)
             # Caso B1: se node só tiver o filho esquerdo
             elif node.right is None:
@@ -167,6 +193,7 @@ class BinarySearchTree:
         # return self._eliminar(next_node, node, element)
 
     def _substituir_nodo(self, node, parent, substitute):
+        # Verifica se o nó que será eliminado é o filho esquerdo ou direito do pai:
         if parent.left == node:
             parent.left = substitute
         elif parent.right == node:
@@ -232,3 +259,53 @@ class BinarySearchTree:
                     parent.right = novo_node
                 break
         return valor
+
+    # Destruir a BST
+    def destroy(self):
+        self._destroy(self.root)
+
+    def _destroy(self, node):
+        if node is not None:
+            self._destroy(node.left)
+            self._destroy(node.right)
+            self.eliminar(node.value)
+
+    # IMPLEMENTAÇÕES PARA BALANCEAMENTO ESTÁTICO
+
+    # Determinar a quantidade de nodos da BST
+    def count(self):
+        return self._count(self.root)
+
+    # Atravessamento em pós-ordem para contar nodos da BST
+    def _count(self, node):
+        if node is None:
+            return 0
+        left_cont = self._count(node.left)
+        right_cont = self._count(node.right)
+        return left_cont + right_cont + 1
+
+    # Atravessamento em ordem para criar uma lista ordenada de menor a maior
+    def carrega_lista(self, meio):
+        if meio is not None:
+            self.carrega_lista(meio.left)
+            self.lista_aux.append(meio.value)
+            self.carrega_lista(meio.right)
+
+    def balanceamento_estatico(self, inicio, fim):
+        if inicio <= fim:
+            # Calcula a posição central do sub-vetor
+            meio = (inicio + fim) // 2
+            # Insere o valor na árvore
+            self.add(self.lista_aux[meio])
+            self.balanceamento_estatico(inicio, meio - 1)
+            self.balanceamento_estatico(meio + 1, fim)
+
+    def balancear(self):
+        # Percorremos a BST em-ordem, para criar o vetor ordenado
+        self.carrega_lista(self.root)
+        # Destruímos a BST, que será criada novamente
+        self.destroy()
+        # Balanceamento estático: criamos a BST de novo
+        self.balanceamento_estatico(0, len(self.lista_aux) - 1)
+        # Limpamos o vetor para caso haver mais de um balanceamento
+        self.lista_aux = []
