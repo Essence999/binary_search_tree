@@ -5,4 +5,4 @@ Durante o desenvolvimento, criei duas versões do código. Na primeira versão, 
 
 Uma das mudanças que considero mais relevantes foi a adição da função "_substituir_nodo" para eliminar a repetição de código na função "_eliminar", especificamente nos casos de eliminação. A adaptação da função de eliminação na segunda versão foi a parte mais complexa e envolveu vários testes, mas foi enriquecedora para o aprendizado.
 
-Por fim, deixo os créditos ao professor Manuel Ledón, que disponibilizou o código original e suas aulas explicativas que contribuíram para o desenvolvimento deste projeto.
+Por fim, deixo os créditos ao professor [Manuel Ledón](https://sites.google.com/site/mfpledon/info-geral), que disponibilizou o código original e suas aulas explicativas que contribuíram para o desenvolvimento deste projeto.
