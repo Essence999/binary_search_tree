@@ -5,12 +5,12 @@ print("Vamos criar uma BST com números inteiros:")
 
 bst1 = Bst()
 numeros = [8, 7, 6, 9, 6, 5, 1, 2, 3, 4]
-
+print(numeros)
 for numero in numeros:
-    print("Inserimos ", bst1.add(numero))
+    bst1.add(numero)
 
 bst1.atravessar_arvore()
-bst1.visualizar_arvore()
+print()
 
 bst2 = Bst()
 print("Agora vamos criar uma BST (e percorrer pelos RGMs) de objetos da classe Aluno:")
@@ -23,4 +23,3 @@ bst2.add(Aluno("222", "Kakine Teitoku", "M", 9.8))
 bst2.add(Aluno("444", "Mugino Shizuru", "F", 8.6))
 
 bst2.atravessar_arvore()
-bst2.visualizar_arvore()

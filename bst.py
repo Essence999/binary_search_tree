@@ -8,23 +8,17 @@ class Bst:
         self.lista_aux = []
 
     def atravessar_arvore(self):
-        print("\nVamos mostrar a BST percorrendo em-ordem:")
+        print("\nVisualização da árvore pré-balanceamento:\n")
+        print(self)
+        print("\nEm ordem:")
         self.em_ordem()
-        print("\nPré ordem:")
-        self.pre_ordem()
-        print("\nPós ordem:")
-        self.pos_ordem()
         print("\nEm nível:")
         self.em_nivel()
-        print("\nPré ordem iterativo:")
-        self.pre_ordem_iterativo()
-
-    def visualizar_arvore(self):
-        print("\nVisualização da árvore pré balanceamento:\n")
-        print(self)
+        print("\nVisualização da árvore pós-balanceamento:\n")
         self.balancear()
-        print("Visualização da árvore pós balanceamento:\n")
         print(self)
+        print("\nEm nível:")
+        self.em_nivel()
 
     def __str__(self):
         return f"{self.root}"
