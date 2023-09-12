@@ -1,9 +1,9 @@
 from aluno import Aluno
-from bst import Bst
+from bst import BST
 
 print("Vamos criar uma BST com números inteiros:")
 
-bst1 = Bst()
+bst1 = BST()
 numeros = [8, 7, 6, 9, 6, 5, 1, 2, 3, 4]
 print(numeros)
 for numero in numeros:
@@ -12,7 +12,7 @@ for numero in numeros:
 bst1.atravessar_arvore()
 print()
 
-bst2 = Bst()
+bst2 = BST()
 print("Agora vamos criar uma BST (e percorrer pelos RGMs) de objetos da classe Aluno:")
 
 bst2.add(Aluno("333", "Misaka Mikoto", "F", 9.7))

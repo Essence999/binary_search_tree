@@ -1,7 +1,7 @@
 from node import Node
 
 
-class Bst:
+class BST:
     def __init__(self):
         self.root = None
         # Atributo necessário para efetuar o balanceamento estático
