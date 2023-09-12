@@ -266,18 +266,6 @@ class Bst:
 
     # IMPLEMENTAÇÕES PARA BALANCEAMENTO ESTÁTICO
 
-    # Determinar a quantidade de nodos da BST
-    def count(self):
-        return self._count(self.root)
-
-    # Atravessamento em pós-ordem para contar nodos da BST
-    def _count(self, node):
-        if node is None:
-            return 0
-        left_cont = self._count(node.left)
-        right_cont = self._count(node.right)
-        return left_cont + right_cont + 1
-
     # Atravessamento em ordem para criar uma lista ordenada de menor a maior
     def carrega_lista(self, meio):
         if meio is not None:
