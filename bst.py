@@ -182,9 +182,6 @@ class Bst:
             return self._eliminar(node.left, node, element)
         # Senão, procurar à direita:
         return self._eliminar(node.right, node, element)
-        # Versão que ocupa menos linhas:
-        # next_node = node.left if element < node.value else node.right
-        # return self._eliminar(next_node, node, element)
 
     def _substituir_nodo(self, node, parent, substitute):
         # Verifica se o nó que será eliminado é o filho esquerdo ou direito do pai:
@@ -239,17 +236,17 @@ class Bst:
             self.root = novo_node  # Se a BST estiver vazia, inserimos na raiz
             return valor
 
-        atual = self.root  # Começamos procurando pela raiz
+        current = self.root  # Começamos procurando pela raiz
         while True:
-            parent = atual
-            if valor < atual.value:  # Verificamos se devemos ir para a esquerda
-                atual = atual.left
-                if atual is None:  # Inserir à esquerda
+            parent = current
+            if valor < current.value:  # Verificamos se devemos ir para a esquerda
+                current = current.left
+                if current is None:  # Inserir à esquerda
                     parent.left = novo_node
                     break
             else:  # Ou ir para a direita
-                atual = atual.right
-                if atual is None:  # Inserir a direita
+                current = current.right
+                if current is None:  # Inserir a direita
                     parent.right = novo_node
                 break
         return valor
